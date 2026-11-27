@@ -1,0 +1,26 @@
+<Project>
+  <PropertyGroup>
+    <CVRPATH Condition="'$(CVRPATH)' == ''">C:\Program Files (x86)\Steam\steamapps\common\ChilloutVR</CVRPATH>
+    <ManagedLibsPath>$(CVRPATH)\ChilloutVR_Data\Managed\</ManagedLibsPath>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>$(NoWarn);MSB3277;MSB3243;CS0649;CS0169;CS0618</NoWarn>
+    <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);MSB3243;MSB3277;CS0649;CS0169;CS0618</MSBuildWarningsAsMessages>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'TTSAPI'">
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <OutputPath>$(CVRPATH)\Mods\</OutputPath>
+    <DebugType>embedded</DebugType>
+    <Optimize Condition="'$(Configuration)' == 'Release'">true</Optimize>
+  </PropertyGroup>
+
+  <Target Condition="'$(OS)' == 'Windows_NT' And '$(MSBuildProjectName)' == 'TTSAPI'" Name="DeleteOutputDLLIfExists" BeforeTargets="BeforeBuild">
+    <Delete Files="$(OutputPath)$(TargetName).dll" ContinueOnError="true" />
+  </Target>
+</Project>

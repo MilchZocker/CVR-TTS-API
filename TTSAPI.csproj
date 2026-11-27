@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>TTSAPI</AssemblyName>
+    <RootNamespace>TTSAPI</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="src\**\*.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MelonLoader">
+      <HintPath>$(CVRPATH)\MelonLoader\net6\MelonLoader.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(CVRPATH)\MelonLoader\net6\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <GameLibs Include="$(ManagedLibsPath)*.dll" />
+    <GameLibs Remove="$(ManagedLibsPath)Microsoft.Win32.Registry.dll" />
+  </ItemGroup>
+
+  <Target Name="AddDynamicReferences" BeforeTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <Reference Include="@(GameLibs->'%(Filename)')">
+        <HintPath>%(GameLibs.Identity)</HintPath>
+        <Private>False</Private>
+      </Reference>
+    </ItemGroup>
+  </Target>
+</Project>

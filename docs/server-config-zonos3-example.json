@@ -1,0 +1,46 @@
+{
+  "host": "127.0.0.1",
+  "port": 8080,
+  "backend": "cuda",
+  "lazy_load": true,
+  "max_loaded_models": 1,
+  "models": [
+    {
+      "id": "zonos3",
+      "family": "zonos3",
+      "path": "C:/audio-cpp/models/ZONOS3-Mini-GGUF/backbone-ptq.gguf",
+      "task": "tts",
+      "mode": "offline",
+      "session_options": {
+        "zonos3.encoder_backend": "same",
+        "zonos3.keep_reference_encoder": "false",
+        "zonos3.voice_cache_slots": "4",
+        "zonos3.stream_chunk_frames": "16"
+      },
+      "voice_presets": {
+        "my_voice": {
+          "voice_ref": "C:/audio-cpp/voices/my_voice.wav",
+          "options": {
+            "speaker_mode": "reference",
+            "language": "en_us",
+            "text_normalization": true,
+            "max_tokens": 2048,
+            "temperature": 0.75,
+            "top_k": 80,
+            "top_p": 0.69,
+            "repetition_penalty": 2.4,
+            "repetition_window": 96,
+            "repetition_codebooks": 6,
+            "guidance_scale": 1.6,
+            "fmax": 40000,
+            "silence_prefill_frames": 3,
+            "headroom_db": 2.5,
+            "soft_limit": true,
+            "text_chunk_size": 1000
+          }
+        }
+      },
+      "default_voice_preset": "my_voice"
+    }
+  ]
+}
